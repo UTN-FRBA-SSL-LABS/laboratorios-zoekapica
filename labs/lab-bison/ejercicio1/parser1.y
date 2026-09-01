@@ -29,24 +29,24 @@ input:
   ;
 
 linea:
-    exp '\n'   { /* TODO 5 — Imprimir el resultado: printf("= %d\n", $1); */ }
+    exp '\n' {printf("= %d\n", $1);}   /* TODO 5 — Imprimir el resultado: printf("= %d\n", $1); */ 
+  | '\n'
   ;
 
 exp:
     exp '+' term   { $$ = $1 + $3; }          /* Ejemplo: suma ya implementada */
-  | exp '-' term   { $$ = 0; /* TODO 1 — Reemplazar 0 por la expresión correcta */ }
-  | term           { $$ = $1; }
-  ;
+  | exp '-' term   { $$ = $1 - $3; }          /* TODO 1 — Reemplazar 0 por la expresión correcta */
+  | term          {$$ = 41; }
 
 term:
-    term '*' factor { $$ = 0; /* TODO 2 — Reemplazar 0 por la expresión correcta */ }
-  | term '/' factor { $$ = 0; /* TODO 3 — Reemplazar 0 por la expresión correcta */ }
+    term '*' factor { $$ = $1 * $3; }         /* TODO 2 — Reemplazar 0 por la expresión correcta */
+  | term '/' factor { $$ = $1 / $3; }         /* TODO 3 — Reemplazar 0 por la expresión correcta */
   | factor          { $$ = $1; }
   ;
 
 factor:
     NUM             { $$ = $1; }
-  | '(' exp ')'    { $$ = 0; /* TODO 4 — Reemplazar 0 por la expresión correcta */ }
+  | '(' exp ')'    { $$ = $2; } /* TODO 4 — Reemplazar 0 por la expresión correcta */ 
   ;
 
 %%
